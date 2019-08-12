@@ -130,4 +130,32 @@ public class TestSingleRedis {
 
     }
 
+    @Test
+    public void testSet() {
+
+        // add elements
+        jedis.sadd("user", "u1");
+        jedis.sadd("user", "u2");
+        jedis.sadd("user", "u3");
+        jedis.sadd("user", "u4");
+        jedis.sadd("user", "u5");
+        // remove u5
+        jedis.srem("user", "u5");
+        System.out.println("jedis.smembers: " + jedis.smembers("user"));
+        System.out.println("jedis.sismember: " + jedis.sismember("user","u5"));
+        System.out.println("jedis.sismember: " + jedis.sismember("user","u4"));
+        System.out.println("jedis.srandmember: " + jedis.srandmember("user"));
+        System.out.println("jedis.scard: " + jedis.scard("user"));
+
+    }
+    /**
+     * Result of the demo:testMap()
+     jedis.smembers: [u2, u1, u3, u4]
+     jedis.sismember: false
+     jedis.sismember: true
+     jedis.srandmember: u4
+     jedis.scard: 4
+     *
+     */
+
 }
