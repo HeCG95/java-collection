@@ -5,3 +5,5 @@ Collect some popular framework usage of Java:
 
 * Java-Redis
     * ```jedis```
+    
+* Java-ActiveMQ
