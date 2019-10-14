@@ -10,7 +10,8 @@ public class Sender {
 
         String username = "admin";
         String password = "admin";
-        String brokerURL = "tcp://192.168.2.113:61616";
+        String brokerURL = "failover:(tcp://192.168.2.113:51511,tcp://192.168.2.113:51512,tcp://192.168.2.113:51513)?Randomize=false";// failure transfer
+        brokerURL = "tcp://192.168.2.113:61616";
         // (1)
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(username,password,brokerURL);
         // (2)
