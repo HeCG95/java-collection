@@ -7,3 +7,6 @@ Collect some popular framework usage of Java:
     * ```jedis```
     
 * Java-ActiveMQ
+
+* SpringBoot-ActiveMQ
+    * ```mail```
