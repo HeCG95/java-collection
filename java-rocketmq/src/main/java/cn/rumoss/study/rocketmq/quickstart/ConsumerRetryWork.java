@@ -10,7 +10,7 @@ import com.alibaba.rocketmq.common.message.MessageExt;
 
 import java.util.List;
 
-public class Consumer {
+public class ConsumerRetryWork {
 
     public static void main(String[] args) throws MQClientException {
 
@@ -34,6 +34,31 @@ public class Consumer {
                                                             ConsumeConcurrentlyContext context) {
                 System.out.println(Thread.currentThread().getName() + " Receive message size: " + msgs.size());
                 System.out.println(Thread.currentThread().getName() + " Receive New Messages: " + msgs);
+                MessageExt msg = msgs.get(0);
+                try {
+
+                    String msgBody = new String(msg.getBody(), "UTF-8");
+                    if("Hello RocketMQ 6".equals(msgBody)){
+                        // Test Consume exception occur
+                        int ans = 1%0;
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    // Add here
+                    int reconsumeTimes = msg.getReconsumeTimes();
+                    System.out.println("Current reconsume times: " + reconsumeTimes);
+                    if(reconsumeTimes==3){// After retry 3 times
+                        // Add compensation ops
+                        // adding logs and persist to database ...
+                        System.out.println("adding logs and persist to database ...");
+                        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                    }else {
+                        return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+                    }
+
+                }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });

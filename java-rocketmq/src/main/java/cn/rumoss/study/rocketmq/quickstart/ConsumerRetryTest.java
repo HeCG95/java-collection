@@ -8,9 +8,10 @@ import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class Consumer {
+public class ConsumerRetryTest {
 
     public static void main(String[] args) throws MQClientException {
 
@@ -34,6 +35,20 @@ public class Consumer {
                                                             ConsumeConcurrentlyContext context) {
                 System.out.println(Thread.currentThread().getName() + " Receive message size: " + msgs.size());
                 System.out.println(Thread.currentThread().getName() + " Receive New Messages: " + msgs);
+                for(MessageExt msg : msgs){
+                    try {
+
+                        String msgBody = new String(msg.getBody(), "UTF-8");
+                        if("Hello RocketMQ 6".equals(msgBody)){
+                            // Test Consume exception occur
+                            int ans = 1%0;
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+                    }
+                }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });

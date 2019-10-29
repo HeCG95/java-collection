@@ -12,9 +12,12 @@ public class Producer {
         DefaultMQProducer producer = new DefaultMQProducer("quickstart_producer");
         producer.setNamesrvAddr("192.168.2.182:9876;192.168.2.183:9876");
 
+        // set timeout count
+        producer.setRetryTimesWhenSendFailed(3);
+
         producer.start();
 
-        for(int i=0;i<100;i++){
+        for(int i=0;i<10;i++){
             try {
                 Message message = new Message("TopicQuickStart",
                         "TagA",
