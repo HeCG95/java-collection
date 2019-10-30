@@ -8,6 +8,7 @@ import com.alibaba.rocketmq.client.consumer.rebalance.AllocateMessageQueueAverag
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;
+import com.alibaba.rocketmq.common.protocol.heartbeat.MessageModel;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public class Consumer {
         /*AllocateMessageQueueAveragely avg = new AllocateMessageQueueAveragely();
         consumer.setAllocateMessageQueueStrategy(avg);*/
 
+        // Broadcast mode need consumer start first
+        consumer.setMessageModel(MessageModel.BROADCASTING);
+
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             //@Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
@@ -40,7 +44,7 @@ public class Consumer {
                         System.out.println("Receive message: " + msgBody + msg);
 
                         // Sleep a minute mock message failure
-                        Thread.sleep(60000);
+                        //Thread.sleep(60000);
                     }
 
                 } catch (Exception e) {

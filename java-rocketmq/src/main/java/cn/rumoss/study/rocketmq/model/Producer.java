@@ -14,8 +14,8 @@ public class Producer {
 
         producer.start();
 
-//        for(int i=0;i<100;i++){
-        for(int i=0;i<1;i++){
+        for(int i=0;i<10;i++){
+//        for(int i=0;i<1;i++){
             try {
                 Message message = new Message("Topic1",
                         "Tag1",

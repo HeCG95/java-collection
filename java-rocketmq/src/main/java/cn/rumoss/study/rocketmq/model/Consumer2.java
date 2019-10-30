@@ -7,6 +7,7 @@ import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;
+import com.alibaba.rocketmq.common.protocol.heartbeat.MessageModel;
 
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class Consumer2 {
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
         consumer.subscribe("Topic1", "Tag1 || Tag2 || Tag3");
+
+        // Broadcast mode need consumer start first
+        consumer.setMessageModel(MessageModel.BROADCASTING);
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             //@Override
