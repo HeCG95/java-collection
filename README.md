@@ -10,3 +10,10 @@ Collect some popular framework usage of Java:
 
 * SpringBoot-ActiveMQ
     * ```mail```
+
+* Java-RocketMQ
+
+* SpringBoot-RocketMQ
+    * ```Normal Messgae```
+    * ```Order Messgae```
+    * ```Transaction Messgae```

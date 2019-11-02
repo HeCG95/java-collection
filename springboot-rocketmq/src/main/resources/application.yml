@@ -1,0 +1,23 @@
+#spring:
+#  jms:
+#      template:
+#        default-destination: default.message.queue
+#  activemq:
+#    broker-url: tcp://192.168.2.113:61616
+#    user: admin
+#    password: admin
+
+rocketmq:
+  name-server: 192.168.2.182:9876;192.168.2.183:9876
+  producer:
+    group: springboot-producer
+    sendMessageTimeout: 300000
+
+# properties used in the application
+demo:
+  rocketmq:
+    topic: string-topic
+    orderTopic: order-paid-topic
+    msgExtTopic: message-ext-topic
+    transTopic: spring-transaction-topic
+    extNameServer: 192.168.2.182:9876

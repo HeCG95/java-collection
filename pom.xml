@@ -12,8 +12,8 @@
         <module>java-redis</module>
         <module>java-activemq</module>
         <module>springboot-activemq</module>
-        <module>javarocketmq</module>
         <module>java-rocketmq</module>
+        <module>springboot-rocketmq</module>
     </modules>
 
     <name>Java Framework Collections Code</name>
