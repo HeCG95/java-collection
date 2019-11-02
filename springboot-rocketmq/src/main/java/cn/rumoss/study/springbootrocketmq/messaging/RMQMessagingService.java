@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
-public class JmsMessagingService implements MessagingService {
+public class RMQMessagingService implements MessagingService {
 
     @Resource
     private RocketMQTemplate rocketMQTemplate;
@@ -40,7 +40,7 @@ public class JmsMessagingService implements MessagingService {
     private String msgExtTopic;
 
     @Autowired
-    public JmsMessagingService(RocketMQTemplate rocketMQTemplate) {
+    public RMQMessagingService(RocketMQTemplate rocketMQTemplate) {
         this.rocketMQTemplate = rocketMQTemplate;
     }
 
