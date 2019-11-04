@@ -14,6 +14,7 @@
         <module>springboot-activemq</module>
         <module>java-rocketmq</module>
         <module>springboot-rocketmq</module>
+        <module>think-in-java</module>
     </modules>
 
     <name>Java Framework Collections Code</name>
