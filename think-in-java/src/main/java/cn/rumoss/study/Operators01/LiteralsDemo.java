@@ -8,13 +8,15 @@ public class LiteralsDemo {
         System.out.println("i1: " + Integer.toBinaryString(i1));
         int i2 = 0X2F; // Hexadecimal (uppercase)
         System.out.println("i2: " + Integer.toBinaryString(i2));
-        int i3 = 0177; // Octal (leading zero)
+        int i3 = 01_77; // Octal (leading zero)
         System.out.println("i3: " + Integer.toBinaryString(i3));
 
         char c = 0xffff; // max char hex value
         System.out.println("c: " + Integer.toBinaryString(c));
         c = 0b1111_1111_1111_1111;
         System.out.println("c: " + Integer.toBinaryString(c));
+        c = 1_0;
+        System.out.println("cc: " + Integer.toBinaryString(c));
         byte b = 0x7f; // max byte hex value
         System.out.println("b: " + Integer.toBinaryString(b));
         short s = 0x7fff; // max short hex value
