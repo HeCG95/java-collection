@@ -109,10 +109,58 @@ out.println("Import static");
 + 编译器根据```参数类型列表```来判断调用的是哪个方法
 
 ## 5.3 默认构造函数
++ Java提供的无参构造函数，在创建一个对象的时候会调用默认构造函数
++ 如果重载有参构造函数，默认的构造函数则不会再提供
 
 ## 5.4 this
++ 除开```静态方法```，实例方法都会默认当前实例```this```作为该方法的第一个参数：
+```java
+class MyObj{
+    void fun(){
+        System.out.println("this demo");
+    }
+    void fun(int i){
+        System.out.println("this demo");
+    }
+}
+```
++ 通过反编译```javap -v```看到的局部变量表：
+```bash
+## void fun();
+stack=2, locals=1, args_size=1
+LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       9     0  this   Lcn/rumoss/study/Initialization02/MyObj;
+## void fun(int);
+stack=2, locals=2, args_size=2
+LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       9     0  this   Lcn/rumoss/study/Initialization02/MyObj;
+            0       9     1     i   I
+## 构造函数
+cn.rumoss.study.Initialization02.MyObj();
+    descriptor: ()V
+    flags:
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 16: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcn/rumoss/study/Initialization02/MyObj;
+```
++ 同时有可以看到，默认的构造函数里面，也有this作为参数
++ this只能在非静态方法中使用
++ 需要返回当前对象时，才会要求显式调用```this```
++ 使用```this```在一个构造器中调用另外一个构造器：this(x,y,z...)，必须第一行调用，不能重复调用
++ ```static```：静态方法不能直接调用非静态方法(作为参数传入除外，此时实际是局部变量)，反之可以
 
 ## 5.5 清理：终结处理和垃圾回收
++ Java使用```finalize()```来帮助程序员写回收不是由```new```开辟的空间，而是有其他```special```的内存空间的代码
++ ```finalize()```在GC准备释放对象空间之前被调用，因此可以用来在GC的时候执行一些重要的清理工作
 
 ## 5.6 成员初始化
 
