@@ -272,3 +272,123 @@ public static cn.rumoss.study.Initialization02.Spiciness[] values();
 
 
 ---
+
+# 7.复用类
+
+两种方式复用类：
++ ```组合：```在一个类A中创建另外一个类B，为了使用B的功能
++ ```继承：```
+
+## 7.1 组合语法
+
++ ```System.out.println```输出的没有调用String的```toString()```方法，只是简单的复制了String的字符数组 - ```java.io.BufferedWriter.write(java.lang.String, int, int)```
++ 引用变量初始化的时机-4处：
+    + 对象定义的时候
+    + 构造器内
+    + 使用的时候，```惰性初始化```
+    + 使用实例初始化 - 非静态代码块(构造器执行之前)
+
+## 7.2 继承语法
+
++ 使用关键字 - ```A extends B``` A类继承B类
++ 子类构造器会默认调用父类构造器，先执行完后才会执行自己的构造器
++ 如果父类提供了有参构造函数，没有默认构造函数
+    + 除非子类在其构造函数中显示调用```父类的有参构造函数```，否则编译器会提示父类没有提供无参构造函数，因为编译器默认只会调用父类的无参构造函数
+```bash
+public class cn.rumoss.study.ReusingClasses03.Detergent extends cn.rumoss.study.ReusingClasses03.Cleanser
+
+Constant pool:
+   #1 = Methodref          #20.#43        // cn/rumoss/study/ReusingClasses03/Cleanser."<init>":()V
+
+public cn.rumoss.study.ReusingClasses03.Detergent();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method cn/rumoss/study/ReusingClasses03/Cleanser."<init>":()V
+         4: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         7: ldc           #3                  // String I am son - Detergent
+         9: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        12: return
+      LineNumberTable:
+        line 5: 0
+        line 6: 4
+        line 7: 12
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      13     0  this   Lcn/rumoss/study/ReusingClasses03/Detergent;
+
+## 看看父类，里面调用了Object的构造方法
+ public cn.rumoss.study.ReusingClasses03.Cleanser();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: ldc           #2                  // String Cleanser
+         7: putfield      #3                  // Field s:Ljava/lang/String;
+        10: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        13: ldc           #5                  // String I am father - Cleanser
+        15: invokevirtual #6                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        18: return
+      LineNumberTable:
+        line 35: 0
+        line 33: 4
+        line 36: 10
+        line 37: 18
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      19     0  this   Lcn/rumoss/study/ReusingClasses03/Cleanser;
+```
+
++ 子类中重写了父类的方法，除非显式使用```super.method()```语法调用，否则不会除非父类的方法，调用的位置可以在子方法体的任何位置，不像构造器一定要在第一行调用
++ 测试发现，子类似乎存在一个父类对象的引用 - ```super```，如果通过super改变某个变量值，且子类未重新定义，则该值通过this和super获取的结果是同一个对象
++ 抛出一个问题：子类创建的时候会创建父类对象吗？
+```bash
+https://blog.csdn.net/banzhengyu/article/details/81039757#commentsedit
+在创建子类对象时，会把父类里的成员变量和方法也加载进内存（因为要加载进内存，所以要看下这些数据是怎么初始化的，所以调用了父类的构造，仅此而已，并不是去创建了父类对象），然后用this和super这两个引用来区分是父类的还是子类的，但是这个内存区域是子类的内存区域，绝不是父类的 this指向了不仅父类可继承的成员变量和可继承的方法外，它还指向了子类的成员变量和方法 而super仅仅只是指向了子类对象中从父类继承的成员变量和方法。
+```
++ 通过HSDB查看对象：```java -cp $JAVA_HOME/lib/sa-jdi.jar sun.jvm.hotspot.HSDB```
+
+
+## 7.3 代理
+
+## 7.4 结合使用组合和继承
+
+## 7.5 在组合与继承之间选择
+
+## 7.6 protected关键字
+
+## 7.7 向上转型
+
+## 7.8 final关键字
+
+## 7.9 初始化及类的初始化
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
