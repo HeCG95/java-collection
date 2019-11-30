@@ -234,20 +234,41 @@ cn.rumoss.study.Initialization02.MyObj();
 
 ## 5.8 数组初始化
 
++ 固有的成员 - ```length```
++ 数组能在运行时创建，不需要提前初始化大小
++ 可变参数列表实质就是```Object数组```，省略了创建数组的过程
++ 可变参数列表遇到```方法重载```可能会出现```语义模糊```的情况
+
 ## 5.9 枚举类型
 
++ 枚举类型实际是继承了一个抽象父类 - ```Enum```
++ 枚举类型的```values()```方法，代码中访问不到，Java编译的时候会加入到class文件中：
+```bash
+$ javap -v Spiciness.class
+public final class cn.rumoss.study.Initialization02.Spiciness 
+    extends java.lang.Enum<cn.rumoss.study.Initialization02.Spiciness>
+
+Constant pool:
+ #40 = Utf8               $VALUES
+ #41 = Utf8               [Lcn/rumoss/study/Initialization02/Spiciness;
+ #42 = Utf8               values
+ #65 = NameAndType        #40:#41        // $VALUES:[Lcn/rumoss/study/Initialization02/Spiciness;
+ 
+public static cn.rumoss.study.Initialization02.Spiciness[] values();
+    descriptor: ()[Lcn/rumoss/study/Initialization02/Spiciness;
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: getstatic     #1                  // Field $VALUES:[Lcn/rumoss/study/Initialization02/Spiciness;
+         3: invokevirtual #2                  // Method "[Lcn/rumoss/study/Initialization02/Spiciness;".clone:()Ljava/lang/Object;
+         6: checkcast     #3                  // class "[Lcn/rumoss/study/Initialization02/Spiciness;"
+         9: areturn
+      LineNumberTable:
+        line 3: 0
+```
++ 由上可知，枚举类型实际上是继承了一个枚举的目标类型参数 - ```Spiciness extends Enum<Spiciness>```
++ 测试发现，枚举类型实例只会存在枚举的个数，修改其中一个实例对象的值，会影响后续取到的实例对象
+
+
+
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
