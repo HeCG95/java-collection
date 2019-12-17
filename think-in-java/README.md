@@ -365,6 +365,19 @@ https://blog.csdn.net/banzhengyu/article/details/81039757#commentsedit
         + 先```父类静态对象```，然后```子类静态对象```
         + 先```父类成员变量```，然后```父类构造函数```(实例块在构造器之前)
         + 先```子类成员变量```，然后```子类构造函数```
++ 通过继承关系，子类调用父类方法，并最后在```finally块```中，调用处理方法，确保正确清理，且清理的顺序与创建的顺序相反
+```java
+public class Son extends Father{
+    void dispose() {
+        System.out.println("Son dispose");
+        super.dispose();
+    }
+}
+```
++ 尽量手动回收，不能依赖GC去完成回收工作。编写自己的清理方法，不要使用```finalize()```
+
+
+
 
 
 
@@ -390,6 +403,7 @@ https://blog.csdn.net/banzhengyu/article/details/81039757#commentsedit
 
 
 
+ 
 
 
 
