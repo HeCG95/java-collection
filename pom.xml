@@ -21,7 +21,7 @@
     <url>https://blog.rumoss.cn</url>
 
     <properties>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <fastjson.version>1.2.59</fastjson.version>
         <lombok.version>1.18.8</lombok.version>
     </properties>
